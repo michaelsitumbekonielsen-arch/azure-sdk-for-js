@@ -9,5 +9,14 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["${configDir}/src", "${configDir}/test/snippets.spec.ts"]
+  "include": [
+    "${configDir}/src",
+    "${configDir}/test/snippets.spec.ts"
+  ],
+  "compileOnSave":,
+  "files":,
+  "buildOptions":,
+  "typeAcquisition":,
+  "watchOptions":,
+  "ts-node":
 }

@@ -4,11 +4,13 @@
 
 ```ts
 
+// noinspection JSAnnotator
+
 import * as coreAuth from '@azure/core-auth';
 import * as coreClient from '@azure/core-client';
-import { OperationState } from '@azure/core-lro';
-import { PagedAsyncIterableIterator } from '@azure/core-paging';
-import { SimplePollerLike } from '@azure/core-lro';
+import {OperationState} from '@azure/core-lro';
+import {PagedAsyncIterableIterator} from '@azure/core-paging';
+import {SimplePollerLike} from '@azure/core-lro';
 
 // @public
 export interface AADBasedSecurityPrincipal {
@@ -76,10 +78,14 @@ export interface ConfidentialLedgerBackupResponse {
 export class ConfidentialLedgerClient extends coreClient.ServiceClient {
     // (undocumented)
     $host: string;
+
     constructor(credentials: coreAuth.TokenCredential, subscriptionId: string, options?: ConfidentialLedgerClientOptionalParams);
+
     // (undocumented)
     apiVersion: string;
+
     checkNameAvailability(nameAvailabilityRequest: CheckNameAvailabilityRequest, options?: CheckNameAvailabilityOptionalParams): Promise<CheckNameAvailabilityOperationResponse>;
+
     // (undocumented)
     ledger: Ledger;
     // (undocumented)
@@ -91,11 +97,13 @@ export class ConfidentialLedgerClient extends coreClient.ServiceClient {
 }
 
 // @public
-export interface ConfidentialLedgerClientOptionalParams extends coreClient.ServiceClientOptions {
+interface ConfidentialLedgerClientOptionalParams extends coreClient.AADBasedSecurityPrincipal {
     $host?: string;
     apiVersion?: string;
     endpoint?: string;
 }
+
+export default ConfidentialLedgerClientOptionalParams
 
 // @public
 export interface ConfidentialLedgerList {
@@ -229,17 +237,29 @@ export type LanguageRuntime = string;
 // @public
 export interface Ledger {
     beginBackup(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedgerBackup, options?: LedgerBackupOptionalParams): Promise<SimplePollerLike<OperationState<LedgerBackupResponse>, LedgerBackupResponse>>;
+
     beginBackupAndWait(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedgerBackup, options?: LedgerBackupOptionalParams): Promise<LedgerBackupResponse>;
+
     beginCreate(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedger, options?: LedgerCreateOptionalParams): Promise<SimplePollerLike<OperationState<LedgerCreateResponse>, LedgerCreateResponse>>;
+
     beginCreateAndWait(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedger, options?: LedgerCreateOptionalParams): Promise<LedgerCreateResponse>;
+
     beginDelete(resourceGroupName: string, ledgerName: string, options?: LedgerDeleteOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
+
     beginDeleteAndWait(resourceGroupName: string, ledgerName: string, options?: LedgerDeleteOptionalParams): Promise<void>;
+
     beginRestore(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedgerRestore, options?: LedgerRestoreOptionalParams): Promise<SimplePollerLike<OperationState<LedgerRestoreResponse>, LedgerRestoreResponse>>;
+
     beginRestoreAndWait(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedgerRestore, options?: LedgerRestoreOptionalParams): Promise<LedgerRestoreResponse>;
+
     beginUpdate(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedger, options?: LedgerUpdateOptionalParams): Promise<SimplePollerLike<OperationState<LedgerUpdateResponse>, LedgerUpdateResponse>>;
+
     beginUpdateAndWait(resourceGroupName: string, ledgerName: string, confidentialLedger: ConfidentialLedger, options?: LedgerUpdateOptionalParams): Promise<LedgerUpdateResponse>;
+
     get(resourceGroupName: string, ledgerName: string, options?: LedgerGetOptionalParams): Promise<LedgerGetResponse>;
+
     listByResourceGroup(resourceGroupName: string, options?: LedgerListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ConfidentialLedger>;
+
     listBySubscription(options?: LedgerListBySubscriptionOptionalParams): PagedAsyncIterableIterator<ConfidentialLedger>;
 }
 
@@ -439,17 +459,29 @@ export type ManagedCCFListBySubscriptionResponse = ManagedCCFList;
 // @public
 export interface ManagedCCFOperations {
     beginBackup(resourceGroupName: string, appName: string, managedCCF: ManagedCCFBackup, options?: ManagedCCFBackupOptionalParams): Promise<SimplePollerLike<OperationState<ManagedCCFBackupOperationResponse>, ManagedCCFBackupOperationResponse>>;
+
     beginBackupAndWait(resourceGroupName: string, appName: string, managedCCF: ManagedCCFBackup, options?: ManagedCCFBackupOptionalParams): Promise<ManagedCCFBackupOperationResponse>;
+
     beginCreate(resourceGroupName: string, appName: string, managedCCF: ManagedCCF, options?: ManagedCCFCreateOptionalParams): Promise<SimplePollerLike<OperationState<ManagedCCFCreateResponse>, ManagedCCFCreateResponse>>;
+
     beginCreateAndWait(resourceGroupName: string, appName: string, managedCCF: ManagedCCF, options?: ManagedCCFCreateOptionalParams): Promise<ManagedCCFCreateResponse>;
+
     beginDelete(resourceGroupName: string, appName: string, options?: ManagedCCFDeleteOptionalParams): Promise<SimplePollerLike<OperationState<void>, void>>;
+
     beginDeleteAndWait(resourceGroupName: string, appName: string, options?: ManagedCCFDeleteOptionalParams): Promise<void>;
+
     beginRestore(resourceGroupName: string, appName: string, managedCCF: ManagedCCFRestore, options?: ManagedCCFRestoreOptionalParams): Promise<SimplePollerLike<OperationState<ManagedCCFRestoreOperationResponse>, ManagedCCFRestoreOperationResponse>>;
+
     beginRestoreAndWait(resourceGroupName: string, appName: string, managedCCF: ManagedCCFRestore, options?: ManagedCCFRestoreOptionalParams): Promise<ManagedCCFRestoreOperationResponse>;
+
     beginUpdate(resourceGroupName: string, appName: string, managedCCF: ManagedCCF, options?: ManagedCCFUpdateOptionalParams): Promise<SimplePollerLike<OperationState<ManagedCCFUpdateResponse>, ManagedCCFUpdateResponse>>;
+
     beginUpdateAndWait(resourceGroupName: string, appName: string, managedCCF: ManagedCCF, options?: ManagedCCFUpdateOptionalParams): Promise<ManagedCCFUpdateResponse>;
+
     get(resourceGroupName: string, appName: string, options?: ManagedCCFGetOptionalParams): Promise<ManagedCCFGetResponse>;
+
     listByResourceGroup(resourceGroupName: string, options?: ManagedCCFListByResourceGroupOptionalParams): PagedAsyncIterableIterator<ManagedCCF>;
+
     listBySubscription(options?: ManagedCCFListBySubscriptionOptionalParams): PagedAsyncIterableIterator<ManagedCCF>;
 }
 

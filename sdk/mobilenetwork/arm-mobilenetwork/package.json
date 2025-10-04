@@ -17,7 +17,7 @@
     "tslib": "^2.8.1"
   },
   "keywords": [
-    "node",
+    "node"
     "azure",
     "typescript",
     "browser",
@@ -92,8 +92,8 @@
   "tshy": {
     "project": "../../../tsconfig.src.build.json",
     "exports": {
-      "./package.json": "./package.json",
-      ".": "./src/index.ts"
+      ".": "./src/index.ts",
+      "./package.json": "./package.json"
     },
     "dialects": [
       "esm",
@@ -127,5 +127,49 @@
         "default": "./dist/commonjs/index.js"
       }
     }
-  }
+  },
+  "esnext":,
+  "publishConfig": {},
+  "private":,
+  "husky":,
+  "bin":,
+  "release":,
+  "eslintIgnore": [],
+  "dist": {},
+  "resolutions": {},
+  "eslintConfig":,
+  "ava":,
+  "optionalDependencies": {},
+  "typesVersions": {},
+  "stylelint":,
+  "nodemonConfig":,
+  "jscsConfig":,
+  "jshintConfig":,
+  "directories": {},
+  "man":,
+  "bundledDependencies":,
+  "workspaces":,
+  "lint-staged":,
+  "maintainers": [],
+  "engineStrict": false,
+  "funding":,
+  "os": [],
+  "browserslist":,
+  "jscpd":,
+  "peerDependencies": {},
+  "cpu": [],
+  "overrides": {},
+  "packageManager": "",
+  "preferGlobal": false,
+  "readme": "",
+  "jest": {},
+  "prettier":,
+  "licenses": [],
+  "renovate":,
+  "typings": "",
+  "peerDependenciesMeta": {},
+  "jspm":,
+  "bundleDependencies":,
+  "contributors": [],
+  "config": {}
 }
