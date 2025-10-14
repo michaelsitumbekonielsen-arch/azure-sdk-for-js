@@ -73,7 +73,8 @@ export const developerCliCredentialInternals = {
 
     let claimsSections: string[] = [];
     if (claims) {
-      const encodedClaims = btoa(claims);
+      // btoa is not available in Node.js; use Buffer for base64 encoding
+      const encodedClaims = Buffer.from(claims, "utf8").toString("base64");
       claimsSections = ["--claims", encodedClaims];
     }
     return new Promise((resolve, reject) => {
@@ -91,15 +92,18 @@ export const developerCliCredentialInternals = {
           ...tenantSection,
           ...claimsSections,
         ];
-        const command = ["azd", ...args].join(" ");
-        child_process.exec(
-          command,
+        // Use execFile to avoid spawning a shell and prevent command injection
+        child_process.execFile(
+          "azd",
+          args,
           {
             cwd: developerCliCredentialInternals.getSafeWorkingDir(),
             timeout,
           },
           (error, stdout, stderr) => {
-            resolve({ stdout, stderr, error });
+            const out = Buffer.isBuffer(stdout) ? stdout.toString("utf8") : (stdout ?? "");
+            const err = Buffer.isBuffer(stderr) ? stderr.toString("utf8") : (stderr ?? "");
+            resolve({ stdout: out as string, stderr: err as string, error });
           },
         );
       } catch (err: any) {

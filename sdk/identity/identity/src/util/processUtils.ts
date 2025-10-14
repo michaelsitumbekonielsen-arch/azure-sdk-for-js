@@ -25,11 +25,13 @@ export const processUtils = {
         if (Buffer.isBuffer(stderr)) {
           stderr = stderr.toString("utf8");
         }
-        if (stderr || error) {
-          reject(stderr ? new Error(stderr) : error);
-        } else {
-          resolve(stdout);
+        // Many CLI tools write diagnostic info to stderr even on success.
+        // Only reject when the process reports an execution error.
+        if (error) {
+          reject(error);
+          return;
         }
+        resolve(stdout);
       });
     });
   },

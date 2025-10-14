@@ -219,7 +219,8 @@ export class AzurePowerShellCredential implements TokenCredential {
 
       const claimsValue = options.claims;
       if (claimsValue && claimsValue.trim()) {
-        const encodedClaims = btoa(claimsValue);
+        // btoa is not available in Node.js; use Buffer for base64 encoding
+        const encodedClaims = Buffer.from(claimsValue, "utf8").toString("base64");
         let loginCmd = `Connect-AzAccount -ClaimsChallenge ${encodedClaims}`;
 
         const tenantIdFromOptions = options.tenantId;
