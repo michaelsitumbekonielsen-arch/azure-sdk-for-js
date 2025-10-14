@@ -75,8 +75,8 @@ export const cliCredentialInternals = {
       tenantSection = ["--tenant", tenantId];
     }
     if (subscription) {
-      // Add quotes around the subscription to handle subscriptions with spaces
-      subscriptionSection = ["--subscription", `"${subscription}"`];
+      // Pass subscription as a separate argument to avoid shell quoting issues
+      subscriptionSection = ["--subscription", subscription];
     }
     return new Promise((resolve, reject) => {
       try {
@@ -90,12 +90,13 @@ export const cliCredentialInternals = {
           ...tenantSection,
           ...subscriptionSection,
         ];
-        const command = ["az", ...args].join(" ");
-        child_process.exec(
-          command,
-          { cwd: cliCredentialInternals.getSafeWorkingDir(), timeout },
+        // Use execFile to avoid spawning a shell and prevent command injection
+        child_process.execFile(
+          "az",
+          args,
+          { cwd: cliCredentialInternals.getSafeWorkingDir(), timeout, encoding: "utf8" },
           (error, stdout, stderr) => {
-            resolve({ stdout: stdout, stderr: stderr, error });
+            resolve({ stdout, stderr, error });
           },
         );
       } catch (err: any) {
@@ -155,7 +156,8 @@ export class AzureCliCredential implements TokenCredential {
     const scope = typeof scopes === "string" ? scopes : scopes[0];
     const claimsValue = options.claims;
     if (claimsValue && claimsValue.trim()) {
-      const encodedClaims = btoa(claimsValue);
+      // btoa is not available in Node.js; use Buffer for base64 encoding
+      const encodedClaims = Buffer.from(claimsValue, "utf8").toString("base64");
       let loginCmd = `az login --claims-challenge ${encodedClaims} --scope ${scope}`;
 
       const tenantIdFromOptions = options.tenantId;
